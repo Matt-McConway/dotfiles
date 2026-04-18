@@ -5,7 +5,6 @@
     - Neovim
     - Mise
     - Ghostty
-    - Opencode
     - Probably a number of other things I am forgetting!
 
 - Config script and my dotfiles
