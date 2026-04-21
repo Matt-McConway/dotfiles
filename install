@@ -9,10 +9,10 @@ while [[ $# > 0 ]]; do
     if [[ "$1" == "--dry" ]]; then
         dry="1"
     else
-	filter="$1"
-    # Note: no support for array of filters
-	# A good rule of thumb is to reach for interpreted languages like JS or Python when
-	# Needing to deal with arrays
+        filter="$1"
+        # Note: no support for array of filters
+	    # A good rule of thumb is to reach for interpreted languages like JS or Python when
+	    # Needing to deal with arrays
     fi
     
     shift
@@ -20,16 +20,17 @@ done
 
 log() {
     if [[ $dry == "1" ]]; then
-	echo "[DRY RUN]: $@"
+	    echo "[DRY RUN]: $@"
     else
-	echo "$@"
+	    echo "$@"
     fi
 }
 
 execute() {
     log "Execute: $@"
+    
     if [[ $dry == "1" ]]; then
-	return
+	    return
     fi
 
     "$@"
@@ -44,9 +45,10 @@ scripts=$(find installs -maxdepth 1 -mindepth 1 -perm -u+x -type f)
 
 for script in $scripts; do
     if echo "$script" | grep -qv "$filter"; then
-	log "Filtering with [$filter]: $script"
-	continue
+	    log "Filtering with [$filter]: $script"
+	    continue
     fi
+    
     log "Running script: $script"
     execute ./$script
 done
