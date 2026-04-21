@@ -4,15 +4,15 @@ script_dir="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
 filter=""
 dry="0"
 
-cd $script_dir
-
-scripts=$(find installs -maxdepth 1 -mindepth 1 -perm -u+x -type f)
-
+# Parse args
 while [[ $# > 0 ]]; do
     if [[ "$1" == "--dry" ]]; then
         dry="1"
     else
 	filter="$1"
+    # Note: no support for array of filters
+	# A good rule of thumb is to reach for interpreted languages like JS or Python when
+	# Needing to deal with arrays
     fi
     
     shift
@@ -35,13 +35,18 @@ execute() {
     "$@"
 }
 
-log "run: filter=$filter"
+log "Matt-McConway Dev Env Installer"
+log "https://github.com/Matt-McConway/dotfiles"
+log "[RUN]: filter=$filter"
+
+cd $script_dir
+scripts=$(find installs -maxdepth 1 -mindepth 1 -perm -u+x -type f)
 
 for script in $scripts; do
     if echo "$script" | grep -qv "$filter"; then
-	log "filtered [$filter]: $script"
+	log "Filtering with [$filter]: $script"
 	continue
     fi
-    log "running script: $script"
+    log "Running script: $script"
     execute ./$script
 done
