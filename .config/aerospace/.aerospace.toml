@@ -10,7 +10,7 @@ config-version = 2
 after-startup-command = []
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = true
@@ -74,6 +74,12 @@ on-mode-changed = []
     outer.bottom =     0
     outer.top =        0
     outer.right =      0
+
+# Force iOS simulators to tile so they don't float behind other windows
+[[on-window-detected]]
+    if.app-id = 'com.apple.iphonesimulator'
+    run = 'layout tiling'
+
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
