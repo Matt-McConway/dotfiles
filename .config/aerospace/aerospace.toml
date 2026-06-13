@@ -79,7 +79,9 @@ on-mode-changed = []
 [[on-window-detected]]
     if.app-id = 'com.apple.iphonesimulator'
     run = 'layout tiling'
-
+[[on-window-detected]]
+    if.app-id = 'com.apple.Music'
+    run = 'layout tiling'
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
